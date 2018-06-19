@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue  todo  demo</title>
+</head>
+<body>
+<div id="todoList">
+
+    <input type="text" v-model="newTodo" v-on:keypress.enter="addTodo" placeholder="按enter或者点击添加">
+    <button v-on:click="addTodo">添加</button>
+    <ol class="todos">
+        <li v-for="todo in todoList">
+            <input type="checkbox" v-model="todo.done">
+            {{todo.title}}
+
+            <span v-if="todo.done">已完成</span>
+            <span v-else>未完成</span>
+            <button v-on:click ="removeList(todo)">移除</button>
+        </li>
+
+    </ol>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+
+    var app = new Vue({
+        el: '#todoList',
+        data: {
+            newTodo: '',
+            todoList: []
+        },
+        created: function(){
+            window.onbeforeunload = ()=>{
+                let dataStr  = JSON.stringify(this.todoList);
+                window.localStorage.setItem('mytodos',dataStr)
+            };
+            let oldDateStr = window.localStorage.getItem('mytodos')
+            let oldData = JSON.parse(oldDateStr);
+            this.todoList = oldData || []
+        },
+       methods: {
+            addTodo: function(){
+                this.todoList.push({
+                    title: this.newTodo,
+                    done: false
+                });
+                this.newTodo = ''
+            },
+           removeList: function(todo){
+                let index = this.todoList.indexOf(todo);
+                this.todoList.splice(index,1)
+           }
+       }
+    })
+
+
+</script>
+</body>
+</html>
