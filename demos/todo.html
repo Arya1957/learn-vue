@@ -3,17 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>vue  todo  demo</title>
+    <style>
+        #todoList{
+            margin: 30px auto;
+        }
+        #todoList input[type=text]{
+            margin-left: 20px;
+            height: 30px;
+            min-width: 400px;
+            border: 1px solid #b8b8b8;
+        }
+        #todoList input[type=text]:focus{
+            outline: none;
+            border-color: #4b94fc;
+
+        }
+        #todoList li {
+            padding: 10px 0;
+        }
+
+        #todoList span{
+            padding: 15px;
+        }
+        #todoList button{
+            padding: 5px 15px;
+            border-radius: 3px;
+            background: #0c3c90;
+            color: #fff;
+            outline: none;
+        }
+
+    </style>
 </head>
 <body>
 <div id="todoList">
 
-    <input type="text" v-model="newTodo" v-on:keypress.enter="addTodo" placeholder="按enter或者点击添加">
+    <input type="text" v-model="newTodo" v-on:keypress.enter="addTodo" placeholder="请输入待办事项，按enter或直接点击添加">
     <button v-on:click="addTodo">添加</button>
     <ol class="todos">
         <li v-for="todo in todoList">
             <input type="checkbox" v-model="todo.done">
             {{todo.title}}
 
+            <span>创建时间  {{todo.date}}</span>
             <span v-if="todo.done">已完成</span>
             <span v-else>未完成</span>
             <button v-on:click ="removeList(todo)">移除</button>
@@ -46,6 +78,7 @@
             addTodo: function(){
                 this.todoList.push({
                     title: this.newTodo,
+                    date: new Date().toLocaleString(),
                     done: false
                 });
                 this.newTodo = ''
