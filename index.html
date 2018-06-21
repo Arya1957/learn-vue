@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>resume</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div id="layout">
+    <section id="login" v-if="!currentUser">
+        <div>
+            <label><input type="radio" name="'type" value="signUp" v-model="action">注册</label>
+            <label><input type="radio" name="type" value="signIn" v-model="action">登录</label>
+        </div>
+        <!--注册-->
+        <div class="sign-up" v-if="action=='signUp'">
+            <form action="#" method="post" v-on:submit.prevent="signUp">
+                <label> 用户名：</label>
+                <input type="text" placeholder="请输入用户名" v-model="formData.username">    </br>
+                <label> 密码：</label>
+                <input type="password" placeholder="请输入密码" v-model="formData.password">    </br>
+                <input class="action" type="submit" value="注册"> <br>
+            </form>
+        </div>
+        <!--登录-->
+        <div class="sign-in" v-if="action=='signIn'">
+            <form action="#" method="post" v-on:submit.prevent="signIn">
+                <label> 用户名：</label>
+                <input type="text" placeholder="请输入用户名" v-model="formData.username">    </br>
+                <label> 密码：</label>
+                <input type="password" placeholder="请输入密码" v-model="formData.password">    </br>
+                <input type="submit" value="登录"> <br>
+            </form>
+        </div>
+
+    </section>
+
+    <section id="todo" v-if="currentUser">
+        <div class="user">
+            <button v-on:click="logOut"> 退出登录</button>
+            <p>你好，{{currentUser.username}} ！</p>
+        </div>
+
+        <div class="new-task">
+            <input type="text" v-model="todo" v-on:keypress.enter="addTodo" placeholder="请输入待办事项">
+            <button v-on:click="addTodo">添加</button>
+        </div>
+        <ol class="todo-list">
+            <li v-for="todo in todoList">
+                <input type="checkbox"> {{todo.title}}
+                <span v-if="todo.done">已完成</span>
+                <span v-else>未完成</span>
+                <span>创建时间 <span>{{todo.date}}</span> </span>
+                <button v-on:click="removeTodo(todo)">移除</button>
+            </li>
+
+        </ol>
+    </section>
+</div>
+
+<!--<script src="dist/bundle.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./node_modules/leancloud-storage/dist/av.js"></script>
+
+<script src="app.js"></script>
+</body>
+</html>
