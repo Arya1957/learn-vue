@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for</title>
+</head>
+<body>
+
+<h1>v-for指令用法</h1>
+<hr>
+<div id="app">
+    <ul>
+        v-for 基本用法
+        <li v-for="item in items">
+            {{item}}
+        </li>
+    </ul>
+
+    <hr>
+
+    <ul>
+        排序： v-for 结合 computed 使用
+        <li v-for="item in sortItems">
+            <!--这里不能是 items  ， 要改成  sortItems-->
+            {{item}}
+        </li>
+        注意： data里面的items和computed里面，不允许相同名称~
+
+    </ul>
+
+    <hr>
+
+    <ul>
+        对象循环输出
+
+        <li v-for="(item,index) in students">
+            {{index + 1}} : {{item.name}} - {{item.age}}
+        </li>
+
+    </ul>
+
+    <ul>
+        数组对象排序
+        <li v-for="(item,index) in sortStudents">
+            {{index + 1}} : {{item.name}} - {{item.age}}
+        </li>
+
+    </ul>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            items: [20, 23, 18, 65, 32, 19, 54, 56, 41],
+            students: [
+                {name: 'jspang', age: 32},
+                {name: 'Panda', age: 30},
+                {name: 'PanPaN', age: 21},
+                {name: 'King', age: 45}
+            ]
+        },
+        computed: {
+            // 声明一个对象sortItems，如果不重新声明会污染原来的数据源，这是Vue不允许的
+            sortItems: function () {
+                return this.items.sort(sortNumber)
+            },
+            sortStudents: function(){
+                return sortByKey(this.students,'age')
+            }
+        }
+    });
+
+    function sortNumber(a, b) {
+        return a - b
+    }
+    // 数组对象排序
+    function sortByKey(arr, key){
+        return arr.sort(function(a,b){
+            let x = a[key];
+            let y = b[key];
+            return ((x<y)?-1:((x>y)?1:0))
+        })
+    }
+
+
+</script>
+</body>
+</html>

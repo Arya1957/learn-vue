@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if & v-else & v-show</title>
+</head>
+<body>
+
+<h1> v-if & v-else & v-show</h1>
+在控制台输入 "app.isLogin = false" 和 app.isShow = false 可以切换状态 ~
+<hr>
+
+<div id="app">
+    <div v-if="isLogin"> v-if</div>
+    <div v-else> v-else</div>
+    <div v-show = "isShow"> v-show </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            isLogin: true,
+            isShow: true
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text&v-html</title>
+</head>
+<body>
+
+<h1> v-text </h1>
+用{{xxx}}时,有个问题：就是当我们网速很慢或者javascript出错时，会暴露我们的{{xxx}} <br>
+Vue 提供的v-text,可以解决这个问题； <br>
+如果在javascript中写有html标签，需要用v-html。 <br>
+在生产环境中动态渲染HTML是非常危险的，容易导致XSS攻击。所以只能在可信的内容上使用v-html，永远不要在用户提交和可操作的网页上使用。
+<hr>
+<div id="app">
+    <span v-text="message"></span> <br>
+    <div v-html="htmla"></div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hi ~ 这是 v-text',
+            htmla: `<h3>这是 v-html 哦~</h3>`
+        }
+    })
+</script>
+
+</body>
+</html>

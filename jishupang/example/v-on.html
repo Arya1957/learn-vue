@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-on 绑定事件监听器</title>
+</head>
+<body>
+<h1>v-on 绑定事件监听器</h1>
+v-on 的缩写为 @
+<div id="app">
+    本场比赛得分： {{score}}<br/>
+    <button v-on:click="jiafen">加分</button>
+    <button @click="jianfen">减分</button> <br>
+
+    <input type="text"  v-model="score2" placeholder="请输入每次操作的变化值，默认值为 1" style="width: 300px;height: 2em;line-height: 2em">
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            score: 0,
+            score2: ''
+        },
+        methods: {
+            jiafen: function () {
+                this.score += parseInt(this.score2)
+            },
+            jianfen: function () {
+                this.score -= parseInt(this.score2)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
