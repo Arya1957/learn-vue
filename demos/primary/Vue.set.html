@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set全局操作</title>
+</head>
+<body>
+
+<h1> Vue.set全局操作 </h1>
+<hr>
+<div id="app">
+    <ul>
+        <li v-for="item in arr">{{item}}</li>
+    </ul>
+</div>
+
+<button onclick="reset()"> reset </button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    function reset(){
+         Vue.set(app.arr,1, 'B');
+    }
+    let outData = {
+        arr: ['a', 'b', 'c']
+    };
+
+    let app = new Vue({
+        el: '#app',
+        data: outData
+    })
+</script>
+
+</body>
+</html>

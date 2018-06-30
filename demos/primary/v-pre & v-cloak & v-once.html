@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> v-pre & v-cloak & v-once </title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>v-pre & v-cloak & v-once </h1>
+<hr>
+<div id="app">
+    <div>
+        <h4>v-pre ,跳过vue的编译，直接输出原始值</h4>
+        <p v-pre> data 中的message不会出现在这里 {{message}}</p>
+    </div>
+    <hr>
+    <div>
+        <h4> v-cloak ,在vue渲染完指定的整个DOM后才进行显示。它必须和CSS样式一起使用
+        </h4>
+        <p v-cloak>  {{message}} </p>
+    </div>
+    <hr>
+    <div>
+        <h4> v-once ,只渲染元素和组件一次</h4>
+        <div v-once>第一次绑定的值：{{message}}</div>
+        <div><input type="text" v-model="message"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好呀 ~'
+        }
+    })
+</script>
+</body>
+</html>

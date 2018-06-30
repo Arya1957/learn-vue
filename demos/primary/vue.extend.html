@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue.extend 构造器的延伸</title>
+</head>
+<body>
+<h1>vue.extend 构造器的延伸 </h1>
+<hr>
+<div id="app">
+    <author></author>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    let authorInfo = Vue.extend({
+        template: '<p><a :href="URL">{{authorName}}</a></p>',
+        data: function () {
+            return {
+                authorName: 'xxx',
+                URL: 'https://www.google.com/'
+            }
+        }
+    });
+    new authorInfo().$mount("author")
+</script>
+</body>
+</html>

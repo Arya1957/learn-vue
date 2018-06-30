@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <style>
+        img {
+            width: 100px;
+        }
+
+        .active {
+            background: #ccc;
+        }
+
+        .text-danger {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+<h1>v-bind</h1>
+<hr>
+<div id="app">
+    <div>
+        <h4>绑定img 的 src 属性 </h4>
+        <img v-bind:src="imageSrc">
+    </div>
+    <hr>
+    <div>
+        <h4> 绑定 class </h4>
+        <div>
+            <input type="checkbox" id="xxx" v-model="isActive">
+            <label for="xxx"> active or not ? {{isActive}}</label>
+            <p :class="{active: isActive}"> 对象语法，点击选择框进行切</p>
+        </div>
+        <div>
+            <h4>数组语法</h4>
+            <p>分别在控制台输入以下命令，可以切换效果  <br>
+                app.activeClass = '';  <br>
+                app.errorClass = '';  <br>
+                app.activeClass = 'active';  <br>
+                app.errorClass = 'text-danger'  <br>
+
+                 </p>
+            <p v-bind:class="[activeClass, errorClass]">把一个数组传给 v-bind:class，以应用一个 class 列表</p>
+
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h4>绑定内联样式</h4>
+        <p :style = "styleObj">绑定到一个样式对象</p>
+
+    </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            imageSrc: 'https://cn.vuejs.org/images/logo.png',
+            isActive: false,
+            activeClass: 'active',
+            errorClass: 'text-danger',
+            styleObj: {
+                color: 'red',
+                fontSize: '20px'
+            }
+        }
+    })
+</script>
+</body>
+</html>

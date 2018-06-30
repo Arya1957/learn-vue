@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.directive自定义指令</title>
+</head>
+<body>
+<h1>Vue.directive自定义指令</h1>
+<hr>
+<div id="app">
+    <p v-mydirective="background">{{num}}</p>
+    <button @click="add">add</button>
+</div>
+
+<button onclick="unbind()">解绑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    //  解绑
+    function unbind(){
+        app.$destroy();
+    }
+    //  自定义指令 mydirective 和 它的钩子函数
+
+    Vue.directive('mydirective', {
+       bind: function (el, binding) {
+
+           // console.log(el);
+           //   console.log(binding);
+           //   console.log(binding.value);
+           el.style = 'background:' + binding.value;
+           console.log('1 - bind')
+       },
+        inserted: function(){
+            console.log('2 - inserted')
+        },
+        update: function(){
+            console.log('3 - update')
+        },
+        componentUpdated: function(){
+            console.log('4 - componentUpdate')
+        },
+        unbind: function(){
+            console.log('5 - unbind')
+        }
+    });
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            num: 0,
+            background: 'grey',
+        },
+        methods: {
+            add: function () {
+                this.num++
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+
