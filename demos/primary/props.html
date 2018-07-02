@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component 组件props 属性设置</title>
+</head>
+<body>
+<h1> Component 组件props 属性设置</h1>
+<hr>
+<div id="app">
+<blog :blog-title="message"></blog>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+   let app = new Vue({
+       el: '#app',
+       data: {
+           message: 'xxx'
+       },
+       components: {
+           "blog": {
+               template: '<h4> title:  {{ blogTitle }}</h4>',
+               props: ['blogTitle']
+           }
+       }
+   })
+</script>
+
+</body>
+</html>

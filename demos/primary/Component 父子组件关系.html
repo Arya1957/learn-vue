@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component 父子组件关系</title>
+</head>
+<body>
+
+<h1> Component 父子组件关系</h1>
+<hr>
+
+<div id="app">
+    <blog ></blog>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let author = {
+        template:  `<p> author: xxxx </p>`
+    };
+    let blog = {
+        template:  `
+          <div>
+          <h4> title: xxxx </h4>
+          <author> </author>
+          </div>`,
+        components: {
+            "author": author
+        }
+    };
+
+    let app = new Vue({
+        el: '#app',
+        components: {
+            "blog": blog
+        }
+    })
+</script>
+
+
+</body>
+</html>

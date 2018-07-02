@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+</head>
+<body>
+
+<h1>Vue 的声明周期</h1>
+<hr>
+
+<div id="app">
+    {{ count }}
+    <p><button @click="add"> add </button></p>
+</div>
+<button onclick="app.$destroy()">销毁</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            count: 1
+        },
+        methods: {
+            add: function(){
+                this.count++
+            }
+        },
+        beforeCreate: function(){
+            console.log('1 - 初始化之前')
+        },
+        created: function(){
+            console.log('2 - 创建完成')
+        },
+
+        beforeMount: function(){
+            console.log('3 - 挂载之前')
+        },
+        mounted: function(){
+            console.log('4 -被挂载之后')
+        },
+        beforeUpdate: function(){
+            console.log('5 - 数据更新前')
+        },
+        updated: function(){
+            console.log('6 - 被更新后')
+        },
+        activated: function(){
+            console.log('7 - activate')
+        },
+        deactivated: function(){
+            console.log('8 - deactivate')
+        },
+        beforeDestroy: function(){
+            console.log('9- 销毁前')
+        },
+        destroyed: function(){
+            console.log('10 -销毁之后')
+        },
+
+
+    })
+</script>
+</body>
+</html>

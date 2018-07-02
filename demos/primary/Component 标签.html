@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component 标签</title>
+</head>
+<body>
+<h1> 动态组件</h1>
+<hr>
+<div id="app">
+   <component :is="who"> </component>
+    <button @click="change">change</button>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let compomentA = {
+        template: `<p>A</p>`
+    };
+    let compomentB = {
+        template: `<p style = "color: red">B</p>`
+    };
+    let compomentC = {
+        template: `<p style = "color: green">C</p>`
+    };
+    let app = new Vue({
+        el:'#app',
+        data: {
+            who: 'compomentA'
+        },
+        components: {compomentA,  compomentB, compomentC},
+        methods: {
+            change: function(){
+                if(this.who === "compomentA"){
+                    this.who = "compomentB"
+                } else if ( this.who === "compomentB") {
+                    this.who = "compomentC";
+                    } else {
+                    this.who = "compomentA"
+
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

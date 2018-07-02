@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项 ： propsData </title>
+</head>
+<body>
+<h1> propsData Option  全局扩展的数据传递 </h1>
+<hr>
+<div id="app">
+<header> </header>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    let head = Vue.extend({
+        template: `<p>{{message}}  I'am a {{name}}</p>`,
+        data: function(){
+            return {
+                message: 'hello ~'
+            }
+        },
+        props: ['name']
+    });
+    new head({propsData: {name: 'cat'}}).$mount('header')
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed Option 计算选项</title>
+</head>
+<body>
+
+<h1>computed Option 计算选项</h1>
+<p>computed 的作用主要是对原数据进行改造输出。改造输出：包括格式的编辑，大小写转换，顺序重排，添加符号……。</p>
+<br>
+<p>计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是不会被更新的。</p>
+<hr>
+<div id="app1">
+    <h4>格式化输出结果</h4>
+    {{ newPrice }}
+</div>
+<hr>
+<div id="app2">
+    <h4>用计算属性反转数组</h4>
+    <p>这是反转之前的 - {{message}}</p>
+    <p>这是反转之后的 - {{newMessage}}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app1 = new Vue({
+        el: '#app1',
+        data: {
+            price: 100
+        },
+        computed: {
+            newPrice: function () {
+                return this.price = '￥' + this.price + '元'
+            }
+        }
+    });
+
+    let app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'Hello Vue',
+        },
+        computed: {
+            newMessage: function () {
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+
+
+</script>
+
+
+</body>
+</html>

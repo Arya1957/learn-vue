@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Methods Option  方法选项</title>
+</head>
+<body>
+
+<h1> Methods Option  方法选项 </h1>
+<hr>
+<div id="app">
+    <p>{{count}}</p>
+    <button @click="add(2,$event)">add</button>
+    <hr>
+    <btn @click.native="add()"> </btn> ----<span>此时 add()括号不能省</span>
+    <p>使用 .native修， 让组件调用构造器里的方法，而不是组件里的方法。</p>
+</div>
+<hr>
+<button onclick="app.add(10)">外部add调用，不经常用</button>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let btn = {
+        template:  `<button>组件 add </button>`
+    };
+
+    let app = new Vue({
+        el:'#app',
+        data: {
+            count: 0,
+
+        },
+        methods: {
+            add: function(num,event){
+                console.log(event);
+
+                if(num){
+                    this.count += num
+                } else {
+                    this.count ++
+                }
+            }
+        },
+        components: {btn}
+    })
+</script>
+
+</body>
+</html>
