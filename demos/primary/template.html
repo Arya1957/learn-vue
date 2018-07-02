@@ -2,29 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>   </title>
+    <title>template 制作模板</title>
 </head>
-
-
 <body>
-<h1> </h1>
+<h1>template 三种写法</h1>
 <hr>
-<div id="app">
 
+<div id="app1">
+    {{message}}
 </div>
+<hr>
 
+<template id="app2">
+    <h2 style="color: red">我是template标签模板</h2>
+</template>
+<hr>
+
+<script type="x-template" id="app3">
+<h2>我是 script标签模板</h2>
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    let app = new Vue({
-        el:'#app',
+    //  直接写在选项里的模板
+    let app1 = new Vue({
+        el: '#app1',
         data: {
-            message: 'Hi ~'
-        }
-    })
+            message: 'Hi ~~~'
+        },
+        template: `
+     <h2>我是选项模板</h2>`
+    });
+
+    //  写在<template>标签里的模板
+
+    let app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'Hi ~~~'
+        },
+        template: '#app2'
+    });
+
+
+    // 写在<script>标签里的模板
+    let app3 = new Vue({
+        el: '#app3',
+        data: {
+            message: 'Hi ~~~'
+        },
+        template: '#app3'
+    });
+
+
 </script>
-
-
 </body>
 </html>
