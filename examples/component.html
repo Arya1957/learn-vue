@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>components</title>
+</head>
+<body>
+<h1> 组件 </h1>
+<hr>
+<div id="app1">
+    <h3>组件基础</h3>
+    <p>组件是可复用的 Vue 实例，且带有一个名字：MyFirstComponent。我们可以在一个通过 new Vue 创建的 Vue 根实例中，把这个组件作为自定义元素来使用。<br>
+        当使用 PascalCase (驼峰式命名) 定义一个组件时，你在引用这个自定义元素时两种命名法都可以使用。直接在 DOM (即非字符串的模板) 中使用时只有 kebab-case
+        是有效的。也就是说，在此例中，引用这个自定义元素时，应当是 my-first-component 而不是 MyFirstComponent。<br>
+        当直接在 DOM 中使用一个组件 (而不是在字符串模板或单文件组件) 的时候，vue强烈推荐遵循 W3C 规范中的自定义组件名 (字母全小写且必须包含一个连字符)。
+    </p>
+    <my-first-component></my-first-component>
+    <my-first-component></my-first-component>
+    <my-first-component></my-first-component>
+</div>
+<hr>
+
+<div id="app2">
+    <h3>props</h3>
+    <blog-test title=1 -
+    "把数据作为一个自定义特性传递进来"></blog-test>
+    <p>2- 下面是 data 中传来一个数组</p>
+    <blog-test v-for="item in posts"
+               v-bind:key="item.id"
+               v-bind:title="item.title"
+    ></blog-test>
+    <strong>每个组件必须只有一个根元素 , 解决方案是： 将模板的内容包裹在一个父元素内</strong>
+</div>
+<hr>
+
+<div id="app3">
+    <h3> 通过 Prop 向子组件传递数据 </h3>
+    <blog v-for="item in diaries"
+          :key="item.id"
+          :diary="item"
+    ></blog>
+</div>
+<hr>
+<div id="app4">
+    <h3>通过事件向父级组件发送消息 </h3>
+    <p>
+        调用内建的 $emit 方法并传入事件的名字，来向父级组件触发一个事件;然后在博文组件上监听这个事件
+    </p>
+    <div v-bind:style="{fontSize: diaryFontSize + 'em'}">
+      <blog2 v-for="item in blogs"
+             v-bind:key = "item.id"
+             v-bind:diary = "item"
+             v-on:enlarge-text = "diaryFontSize += $event"
+          >
+      </blog2>
+    </div>
+    <p>v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 v-on:myEvent 将会变成 v-on:myevent——导致 myEvent 不可能被监听到。所以最好使用 kebab-case 的事件名。在此例中用的是 enlarge-text   </p>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+
+    Vue.component('MyFirstComponent', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: `<button @click="count++"> You clicked me {{ count }} times</button>`
+    });
+
+    new Vue({el: '#app1'});
+
+    Vue.component('blog-test', {
+        props: ['title'],
+        template: `<h3>{{ title }}</h3>`
+    });
+    new Vue({
+        el: '#app2',
+        data: {
+            posts: [
+                {id: 1, title: 'My journey with Vue'},
+                {id: 2, title: 'Blogging with Vue'},
+                {id: 3, title: 'Why Vue is so fun'}
+            ]
+        }
+    });
+
+    Vue.component('blog', {
+        props: ['diary'],
+        template: `<div>
+                 <h3> {{diary.title}} </h3>
+                 <div v-html="diary.content"></div>
+                </div>`
+    });
+
+    new Vue({
+        el: '#app3',
+        data: {
+            diaries: [
+                {id: 1, title: 'day1', content: '<p>the first day</p>'},
+                {id: 2, title: 'day2', content: '<p>the second day</p>'}
+            ]
+        }
+    });
+
+    Vue.component('blog2', {
+        props: ['diary'],
+        template: `<div>
+      <h3>{{ diary.title }}</h3>
+      <button @click="$emit('enlarge-text',0.2)">
+        Enlarge text
+      </button>
+      <div v-html="diary.content"></div>
+    </div>`
+    });
+
+    new Vue({
+        el: '#app4',
+        data: {
+            diaryFontSize: 1,
+            blogs: [
+                {id: 1, title: 'day1', content: '<p>the first day</p>'},
+                {id: 2, title: 'day2', content: '<p>the second day</p>'}
+            ]
+        }
+    })
+
+
+</script>
+</body>
+</html>
