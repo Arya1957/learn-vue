@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例方法</title>
+</head>
+<body>
+<h1>实例方法</h1>
+<hr>
+
+<div id="app">
+
+</div>
+<button onclick="destroy()">$destroy 卸载</button>
+<button onclick="reload()">$forceUpdate 更新方法</button>
+<button onclick="revise()">$nextTick 数据修改方法</button>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    let hi = Vue.extend({
+        template:  `<p>{{msg}}</p>`,
+        data: function(){
+            return {
+                msg: 'Hi~ 欢迎了解 mount'
+            }
+        },
+        mounted: function(){
+            console.log('mounted被创建')
+        },
+        destroyed: function(){
+            console.log('destroy 了')
+        },
+        updated: function(){
+            console.log('updated')
+        }
+
+    });
+    let vm = new hi().$mount('#app');
+    function destroy(){
+        console.log(1);
+        vm.$destroy()
+    }
+    function reload(){
+        vm.$forceUpdate()
+    }
+    function revise(){
+        vm.msg = 'new message';
+        vm.$nextTick(function(){
+            console.log('message更新完后我被调用了')
+        })
+    }
+
+
+</script>
+
+</body>
+</html>

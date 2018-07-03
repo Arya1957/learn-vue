@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实例事件</title>
+</head>
+<body>
+
+<h1> 实例事件 </h1>
+<hr>
+<div id="app">
+    {{ num }}
+    <button @click="add"> add</button>
+</div>
+
+<button onclick="reduce()">reduce</button>
+<button onclick="once()">这个只执行一次减法</button>
+<button onclick="off()">关闭事件</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            num: 0
+        },
+        methods: {
+            add: function () {
+                this.num++
+            }
+        }
+    });
+    // 实例事件就是在构造器外部写一个调用构造器内部的方法
+    app.$on('reduce', function () {
+        console.log('执行了 reduce 方法');
+        this.num--
+    });
+    function reduce() {
+        app.$emit('reduce')
+    }
+
+   //  once
+    app.$once('once',function(){
+        console.log('只执行一次');
+        this.num--
+    });
+    function once(){
+       app.$emit('once')
+    }
+    //  关闭事件
+    function off(){
+        app.$off('reduce')
+    }
+</script>
+
+
+</body>
+</html>

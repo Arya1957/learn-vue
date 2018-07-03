@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delimiters</title>
+</head>
+<body>
+
+
+<h1> delimiters选项 </h1>
+<hr>
+<div id="app">
+  ${message}
+    delimiters选项, 改变纯文本插入分隔符。<br>
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data: {
+            message: 'Hi ~'
+        },
+        delimiters: ['${','}']
+    })
+</script>
+
+</body>
+</html>

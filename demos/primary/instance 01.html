@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>instance 01</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+<h1>实例入门-实例属性 </h1>
+<hr>
+<div id="app">
+ {{message}}
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data: {
+            message: 'Hi ~'
+        },
+        mounted: function(){
+            $('#app').html('我是jQuery')
+        },
+        methods: {
+            add: function(){
+                console.log('调用了构造器内部的add 方法')
+            }
+        }
+    });
+
+    app.add()
+    console.log(app)
+
+</script>
+
+</body>
+</html>

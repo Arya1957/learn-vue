@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 内置组件 -slot</title>
+</head>
+<body>
+
+<h1> 内置组件 -slot</h1>
+<hr>
+<div id="app">
+    <aa>
+        <span slot="id"> {{aaData.id}}</span>
+        <span slot="title"> {{aaData.title}}</span>
+    </aa>
+</div>
+
+<template id="test">
+    <p><span>序号：  <slot name="id"></slot> </span> 名字：  <slot name="title"></slot> </p>
+</template>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let aa = {
+        template: '#test'
+    };
+    let app = new Vue({
+        el: '#app',
+        data: {
+            aaData: {
+                id: 1,
+                title: 'xxx'
+            }
+        },
+        components: {aa}
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mixins 混入选项操作</title>
+</head>
+<body>
+
+<h1> mixins 混入选项操作 </h1>
+<hr>
+<div id="app">
+{{num}}
+    <button @click="add">add</button>
+    打开控制台看不同的混入的执行顺序
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let addConsole = { //  这是后加的需求
+        updated: function (){
+            console.log('混入的')
+        }
+    };
+
+    Vue.mixin({
+        updated: function(){
+            console.log('我是全局的混入')
+        }
+    });
+    let app = new Vue({
+        el:'#app',
+        data: {
+            num: 0
+        },
+        methods: {
+            add: function(){
+                this.num ++
+            }
+        },
+        updated: function(){
+           console.log('我是原生的update')
+        },
+        mixins: [addConsole] // 混入的先执行
+    })
+</script>
+
+</body>
+</html>
