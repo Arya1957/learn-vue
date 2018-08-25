@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,57 +9,68 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
+
 <body>
   <div id="app">
-    <input type="text" :value="todo" @input="todo = $event.target.value"> <button @click = "addTodo">添加</button> <br>
+    <p v-test="msg"></p>
+    <p v-html="htmlStr">
+    </p>
+    <input type="text" :value="todo" @input="todo = $event.target.value">
+    <button @click="addTodo">添加</button>
+    <br>
     <ol>
       <li v-for="todo in todoLists">
         <input type="checkbox" v-model="todo.done"> {{todo.title}}
         <span v-if="todo.done">已完成</span>
         <span v-else>未完成</span>
-        <span>创建时间    <span> {{todo.date | formatDate}}</span></span>
+        <span>创建时间
+          <span> {{todo.date | formatDate}}</span>
+        </span>
         <button @click="removeTodo">X</button>
       </li>
     </ol>
-    
+
   </div>
   <script>
-    function plus(val){
-      return val>10?val:'0'+val
+    function plus(val) {
+      return val > 10 ? val : '0' + val
     }
-  let app = new Vue({
-    el: '#app',
-    data: {
-      todo: '',
-      todoLists: []
-    },
-    filters: {
-      formatDate: function (d) {
-        let date = new Date(d);  // 将字符串转化为Date类型
-        let year = date.getFullYear(),
-         mon = plus(date.getMonth()+1), // 获取当前月份(0-11,0代表1月)
-         day = plus(date.getDate()),
-         hour = plus(date.getHours()),
-         min = plus(date.getMinutes()),
-         sec = plus(date.getSeconds());
-        return year + '-'+ mon + '-'+ day + '    '+hour + ' : ' + min + ' : ' + sec
-      }
-    },
-    methods: {
-      addTodo(todo){
-        this.todoLists.push({
-          title: this.todo,
-          done: false,
-          date: new Date()
-        })
-        this.todo = ''
+    let app = new Vue({
+      el: '#app',
+      data: {
+        msg: '你好呀~',
+        htmlStr: '<span>test v-html</span>',
+        todo: '',
+        todoLists: []
       },
-      removeTodo(todo) {
-        let index = this.todoLists.indexOf(todo);
-        this.todoLists.splice(index,1)
+      filters: {
+        formatDate: function (d) {
+          let date = new Date(d); // 将字符串转化为Date类型
+          let year = date.getFullYear(),
+            mon = plus(date.getMonth() + 1), // 获取当前月份(0-11,0代表1月)
+            day = plus(date.getDate()),
+            hour = plus(date.getHours()),
+            min = plus(date.getMinutes()),
+            sec = plus(date.getSeconds());
+          return year + '-' + mon + '-' + day + '    ' + hour + ' : ' + min + ' : ' + sec
+        }
+      },
+      methods: {
+        addTodo(todo) {
+          this.todoLists.push({
+            title: this.todo,
+            done: false,
+            date: new Date()
+          })
+          this.todo = ''
+        },
+        removeTodo(todo) {
+          let index = this.todoLists.indexOf(todo);
+          this.todoLists.splice(index, 1)
+        }
       }
-    }
-  })
+    })
   </script>
 </body>
+
 </html>
