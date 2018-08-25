@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>vue 过滤器</title>
+</head>
+
+<body>
+  <div id="app">
+    没过滤的： {{date }}
+    <br> 过滤后的： {{date | formatDate}}
+
+  </div>
+
+  <script>
+    function plus(val) {
+      return val > 10 ? val : '0' + val;
+    }
+
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        date: new Date()
+      },
+      // 定义过滤器
+      filters: {
+        formatDate: function (val) {
+          var date = new Date(val),
+            // 将字符串转化为Date类型
+            year = date.getFullYear(),
+            // //获取完整的年份(4位,1970-????)
+            mon = plus(date.getMonth() + 1),
+            //获取当前月份(0-11,0代表1月)
+            day = plus(date.getDate()),
+            // 获取当前日(1-31)
+            hour = plus(date.getHours()),
+            min = plus(date.getMinutes()),
+            sec = plus(date.getSeconds());
+          console.log(year, mon, day, hour, min, sec)
+          return year + '-' + mon + '-' + day + '    ' + hour + ' : ' + min + ' : ' + sec;
+
+        }
+
+      },
+
+      mounted: function () {
+        this.timer = setInterval(() => {
+          this.date = new Date();
+        }, 1000);
+
+      },
+      beforeDestroyed: function () {
+        if (this.timer) {
+          clearInterval(this.timer);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
