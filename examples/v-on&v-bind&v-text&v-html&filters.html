@@ -12,8 +12,8 @@
 
 <body>
   <div id="app">
-    <p v-test="msg"></p>
-    <p v-html="htmlStr">
+      <span v-text="msg"></span>
+      <p v-html="htmlStr">
     </p>
     <input type="text" :value="todo" @input="todo = $event.target.value">
     <button @click="addTodo">添加</button>
