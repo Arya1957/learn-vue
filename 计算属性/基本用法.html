@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算属性基本用法 </title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <p>
+    计算属性还可以依赖多个 Vue 实例的数据，只要其中任一数据变化，计算属性就会重新执行，视图也会更新。
+  </p>
+  <hr>
+  <div id="app">
+    <div id="cart1">
+      这是第一个购物车的商品总价： {{ shop1Total }}
+    </div>
+    <hr>
+    <div id="cart2">
+      这是第二个购物车的商品总价： {{ shop2Total }}
+    </div>
+    <hr>
+    <p>两个购物车的总价是: {{ totalPrice }} </p>
+  </div>
+  <script>
+  
+    let cart1 = new Vue({
+      el: '#cart1',
+      data: {
+        shop1: [
+          { name: 'cup', price: 50, count: 1  },
+          { name: 'tea', price: 200, count: 1 }
+        ]
+      },
+      computed: {
+        shop1Total: function () {
+          let total = 0;
+          for (let i = 0, len = this.shop1.length; i < len; i++) {
+            total += this.shop1[i].price * this.shop1[i].count;
+          }
+          return total
+        }
+      }
+
+    })
+    let cart2 = new Vue({
+      el: '#cart2',
+      data: {
+        shop2: [
+          { name: 'T-shirt', price: 200, count: 2 },
+          { name: 'pants', price: 300, count: 1 },
+          { name: 'shoes', price: 300, count: 1 }
+        ]
+      },
+      computed: {
+        shop2Total: function () {
+          let total = 0;
+          for (let j = 0, len = this.shop2.length; j < len; j++) {
+            total += this.shop2[j].price * this.shop2[j].count;
+          }
+          return total
+        }
+      }
+    })
+
+      let app = new Vue({
+      el: '#app',
+      data: {
+        total: 0
+      },
+      computed: {
+        totalPrice: function() {
+          console.log(cart1.shop1Total , cart2.shop2Total)
+          return cart1.shop1Total + cart2.shop2Total
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
