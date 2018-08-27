@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title> v-bind绑定 class  对象语法 </title>
+  <title> v-bind绑定 class 对象语法 </title>
   <style>
-  .test {
-   width: 200px;
-   height: 200px;
-   background: #b7ba6b;
-  }
-  .bac {
-    background: #b2d235;
-  }
-  .bor {
-    border: 3px solid #00ae9d;
-    border-radius: 5px;
-  }
-  input{
-    font-size: 16px;
-    padding: 16px 8px;
-    margin-top: 24px;
-  }
-  </style>  
+    .test {
+      width: 200px;
+      height: 200px;
+      background: #b7ba6b;
+    }
+
+    .bac {
+      background: #b2d235;
+    }
+
+    .bor {
+      border: 3px solid #00ae9d;
+      border-radius: 5px;
+    }
+
+    input {
+      font-size: 16px;
+      padding: 16px 8px;
+      margin-top: 24px;
+    }
+  </style>
 </head>
+
 <body>
   <div id="app">
-    <div class="test" :class= "{bac: isBackground, bor: isBorder}"> </div>
-    <input type="button" value="点击这里切换背景色" @click="changeBackground"> 
-    <input type="button" value="点击这里切换边框" @click="changeBorder"> 
+    <div class="test" :class="{bac: isBackground, bor: isBorder}"> </div>
+    <input type="button" value="点击这里切换背景色" @click="changeBackground">
+    <input type="button" value="点击这里切换边框" @click="changeBorder">
 
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
-  let app = new Vue({
-    el: '#app',
-    data: {
-      isBackground: false,
-      isBorder: false
-    },
-    methods: {
-      changeBackground: function() {
-        this.isBackground = !this.isBackground
+    let app = new Vue({
+      el: '#app',
+      data: {
+        isBackground: false,
+        isBorder: false
       },
-      changeBorder: function(){
-        this.isBorder = !this.isBorder
+      methods: {
+        changeBackground: function () {
+          this.isBackground = !this.isBackground
+        },
+        changeBorder: function () {
+          this.isBorder = !this.isBorder
+        }
       }
-    }
-  })
+    })
   </script>
 
 </body>
+
 </html>
