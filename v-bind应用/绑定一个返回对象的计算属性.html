@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> 绑定一个返回对象的计算属性    </title>
+  <style>
+  .active {
+    background: #ccc;
+  }
+  .warn {
+    color: red;
+  }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="test" v-bind:class = "classObject">
+      <p>绑定一个返回对象的计算属性，这是一个常用且强大的模式</p>
+      <p>在控制台输入 “app.isActive = false”看看</p>
+    </div>
+  </div>
+  <script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      isActive: true,
+      warn: false
+          },
+    computed: {
+      classObject: function (){
+        return {
+          active: this.isActive && !this.warn,
+          warn: !this.isActive && true
+        }
+      }
+    }
+  })
+  </script>
+
+</body>
+</html>
