@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> 绑定内联样式    </title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class = "test1" v-bind:style = "{'background': background,'fontSize': fontSize +'px'}">对象语法</div>
+    <div class="test2" v-bind:style="styleObject">直接绑定到一个样式对象 </div>
+    <div class="test3" v-bind:style = "[styleA,styleB]"> 数组语法，用的比较少</div>
+
+  </div>
+  <script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      background: '#b2d235',
+      fontSize: '24',
+      styleObject: {
+       'border-radius': '5px',
+        border: '3px solid #00ae9d',
+        margin: '24px 0'
+      },
+      styleA: {
+       width: '200px',
+       height: '200px'
+      },
+      styleB: {
+        background: '#b7ba6b'
+      }
+    }
+  })
+  </script>
+
+</body>
+</html>
