@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算属性 VS 方法</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    <p>这是用来测试的test：
+      <span style="color: red;">{{test}}</span>
+    </p>
+    <p>在控制台输入 “app.test = '任何你想输的内容'”，看看下面两个时间的变化 </p>
+    <p>这是通过计算属性拿到的时间： {{ now }} </p>
+    <p> 这是通过方法拿到的时间： {{ time() }} </p>
+  </div>
+
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        test: '1'
+      },
+      computed: {
+        now: function () {
+          return Date.now()
+        }
+      },
+      methods: {
+        time: function () {
+          return Date.now()
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
