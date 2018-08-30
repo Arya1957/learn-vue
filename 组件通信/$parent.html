@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> 父链 this.$parent </title>
+</head>
+<body>
+  <div id="app">
+    <p>使用$parent 访问父组件的数据 </p>
+    <p>我是父组件的msg： {{msg}} </p>
+    <hr>
+    <component-a></component-a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      template: '<div><p>我是子组件A</p><button v-on:click="changeFatherData">点我可以修改父组件的msg</button></div>',
+      methods: {
+        changeFatherData: function(){
+          this.$parent.msg = '当你看到这个，子组件A已经将父组件的msg修改了'
+        }
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {componentA},
+      data: {
+        msg: '你好呀~ '
+      }
+    })
+  </script>
+
+</body>
+
+</html>

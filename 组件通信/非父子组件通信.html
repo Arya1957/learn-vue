@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>  </title>
+  <style>
+  #app>div {
+    width: 400px;
+    height: 100px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+  }
+  span {
+    color: red;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <component-a></component-a>
+    <component-b></component-b>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      template: '<div>我是 A 组件 <button @click="send"> 点我可以给B组件发消息 ~ ~</button></div>',
+      data: function(){
+        return {
+          aMsg: '你好呀~~ 我是来自A组件的内容'
+        }
+      },
+      methods: {
+        send: function (){
+          this.$root.bus.$emit('transfer',this.aMsg)
+        }
+      }
+    }
+    let componentB = {
+      template: '<div>我是B 组件，这是A组件给我发的消息：<span> {{ this.message}}</span></div>',
+      data: function(){
+        return {
+          message: ''
+        }
+      },
+      created: function(){
+        this.$root.bus.$on('transfer',(val)=>{
+         this.message = val
+        })
+      }
+    }
+  let app = new Vue({
+    el: '#app',
+    components: {componentA, componentB},
+    data: {
+      bus: new Vue()
+    }
+  })
+  </script>
+
+</body>
+</html>

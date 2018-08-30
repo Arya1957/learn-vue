@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>  子链 $children 和 $refs的使用</title>
+</head>
+<body>
+  <div id="app">
+    <button @click = "getDataFromChildA">点我可以获取子组件 A 的 msg</button><br>
+    <p v-show="fromchild">这是来自子组件A 的数据： {{fromchild}}</p>
+    <component-a ref="a"></component-a>
+    <component-b ref="b"></component-b>
+    <component-c ref="c"></component-c>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      template: '<div>我是子组件A</div>',
+      data: function(){
+        return {
+          msg: 'a'
+        }
+      }
+    };
+    let componentB = {
+      template: '<div>我是子组件B</div>',
+      data: function(){
+        return {
+          msg: 'b'
+        }
+      }
+    };
+    let componentC = {
+      template: '<div>我是子组件C</div>',
+      data: function(){
+        return {
+          msg: 'c'
+        }
+      }
+    }
+  let app = new Vue({
+    el: '#app',
+    components: {componentA,componentB,componentC},
+    data: {
+      fromchild:''
+    },
+    methods: {
+      getDataFromChildA: function(){
+        this.fromchild = this.$refs.a.msg
+      }
+    }
+  })
+  </script>
+
+</body>
+</html>
