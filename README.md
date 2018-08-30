@@ -2,6 +2,8 @@
 
 gitHub pages:
 https://arya1957.github.io/learn-vue/ 
+源码路径:
+https://github.com/Arya1957/learn-vue/tree/master/
 
 目录介绍： 
 - examples 目录是跟着 vue 文档敲的一些小 demo  <br>
