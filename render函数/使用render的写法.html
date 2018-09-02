@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> </title>
+</head>
+
+<body>
+  <div id="app">
+    <child v-bind:grade="level"> lalala </child>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let child = {
+      props: ['grade'],
+      render: function (createElement) { //  第一个参数必须是 createElement
+        return createElement('h' + this.grade, //tag name 标签名称
+          this.$slots.default) // 子组件中的阵列
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {
+        child
+      },
+      data: {
+        level: 3
+      }
+    })
+
+
+  </script>
+
+</body>
+
+</html>

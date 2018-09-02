@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> </title>
+</head>
+
+<body>
+  <div id="app">
+    <p>createElement 的第一个参数是必选的，它可以是 {String | Object | Function}中的任何一种 。</p>
+    <child1 v-bind:grade="level"> hn </child1>
+    <child2 v-bind:grade="level"> 2 </child2>
+    <child3 v-bind:grade="level"> 3 </child3>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let child1 = {
+      props: ['grade'],
+      render: function (createElement) { //  第一个参数必须是 createElement。createElement 的第一个参数是必选的，它可以是 {String | Object | Function}中的任何一种
+        return createElement('h' + this.grade, // case1: String
+          this.$slots.default) // 子组件中的阵列
+      }
+    }
+    let child2 = {
+      props: ['grade'],
+      render: function (createElement) {
+        return createElement({ //case2: Object
+          template: '<h2>h2</h2>'
+        })
+      }
+    }
+    let child3 = {
+      props: ['grade'],
+      render: function (createElement) {
+        let func = function () {
+          return {
+            template: '<h3>h3</h3>' // case3: Function
+          }
+        };
+        return createElement(func())
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {
+        child1,
+        child2,
+        child3
+      },
+      data: {
+        level: 3
+      }
+    })
+  </script>
+
+</body>
+
+</html>

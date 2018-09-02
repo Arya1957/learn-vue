@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> </title>
+</head>
+
+<body>
+  <div id="app">
+    <component-a msg="sss">
+
+    </component-a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      functional: true, // functional: true,表示该组件无状态(没有响应式数据）,无实例（没有this 上下文）
+      props: ['msg'],
+      render: function (createElement, context) {
+        return createElement('button', {
+          on: {
+            'click': () => {
+              console.log(context);
+              console.log(context.parent); // 父组件app
+              console.log(context.parent.count); //父组件的count: 0
+              console.log(context.props.msg); //  传过来的msg
+              console.log(this) // undefined
+            }
+          }
+        }, '点我看控制台有什么')
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {
+        componentA
+      },
+      data: {
+        count: 0
+      }
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> 具名插槽和插槽访问</title>
+</head>
+
+<body>
+  <div id="app">
+    <component-a>
+      <header slot="header">
+        <h4>这是头部内容</h4>
+      </header>
+      <p>test1</p>
+      <p>test2</p>
+      <footer slot="footer">footer</footer>
+    </component-a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      template: '  <div>\
+                     <div class="header">\
+                         <slot name="header"></slot>\
+                     </div>\
+                     <div class="container">\
+                         <slot></slot>\
+                      </div>\
+                      <div class="footer">\
+                         <slot name="footer"></slot>\
+                      </div>\
+                    </div>',
+      mounted: function () {
+        let header = this.$slots.header; // 访问名为 header 的插槽
+        console.log(header);
+        let headerHtml = header[0].elm.innerHTML;
+        console.log(headerHtml)
+        let headerText = header[0].elm.innerText;
+        console.log(headerText)
+      }
+    };
+    let app = new Vue({
+      el: '#app',
+      components: {
+        componentA
+      }
+    })
+  </script>
+
+</body>
+
+</html>

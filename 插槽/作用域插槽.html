@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> 作用域插槽  </title>
+</head>
+
+<body>
+  <div id="app">
+    <component-a >
+      <template slot = "a" slot-scope = "prop">
+          <!-- template模板是不会被渲染的 -->
+          {{ prop.msg }}
+      </template>
+      <!-- 在 2.5.0+，slot-scope 不再限制在 <template> 元素上使用，而可以用在插槽内的任何元素或组件上 -->
+    </component-a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      template: '<div>\
+                   <slot msg="我是来自子组件的数据" name ="a"> </slot>\
+                 </div>'
+    }
+    let app = new Vue({
+      el: '#app',
+      components: { componentA  },
+      data: {
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

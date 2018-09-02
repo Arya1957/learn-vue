@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> </title>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="switchShow">点我切换图片</button>
+    <component-a :show="show"></component-a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      props: ['show'],
+      render: function (createElement) {
+        let src;
+        if (this.show) {
+          src = './images/1.jpg'
+        } else {
+          src = './images/2.jpg'
+        }
+        return createElement('div', {
+          style: {
+            marginTop: '30px'
+          }
+        }, [
+          createElement('img', {
+            attrs: {
+              src: src
+            },
+            style: {
+              width: '400px'
+            }
+          })
+        ])
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {
+        componentA
+      },
+      data: {
+        show: true
+      },
+      methods: {
+        switchShow() {
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>  </title>
+</head>
+<body>
+  <div id="app">
+    <child1 > </child1>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let child1 = {
+       render: function(createElement) {
+         return createElement(
+           'div',
+            // createElement 第二个参数是数据对象，只能是对象。
+           {    
+            'class': { //  由于class 在JS 中是关键字，所以用了引号，但是实际上不加也不会报错
+              active: false,
+              error: true
+            },
+            style: {
+              fontSize: '24px',
+              color: '#b2d235'
+            },
+            attrs: { //  正常的HTML特性，比如 src
+              id: 'foo'
+            },
+            domProps: { // 用来写原生的 DOM 属性
+              innerHTML: '<p> hi ~ <p>'
+            }
+           }  
+         )
+       }
+    }
+    let app = new Vue({
+    el: '#app',
+    components: { child1 },
+    data: {
+      
+    }
+  })
+  </script>
+
+</body>
+</html>

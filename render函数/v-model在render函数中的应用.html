@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> </title>
+</head>
+
+<body>
+  <div id="app">
+       这是父组件的msg:  {{msg}} <br>
+      <hr>
+      这是用的props传值➕ 绑定input事件 : 
+    <component-a v-on:input = "showMsg" v-bind:message = "msg"> </component-a>
+    <hr>
+    这是用的v-model : 
+    <component-a v-model = "msg" :message = "msg"></component-a>
+    
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      props: ['message'],
+      render: function(createElement) {
+        return createElement ('input',{
+          domProps: {
+            value: this.message
+          },
+          on: {
+            input: () =>{
+              this.$emit('input',event.target.value)
+            }
+          }
+        })
+      }
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {
+        componentA
+      },
+      data: {
+        msg: ''
+      },
+      methods: {
+        showMsg: function(val){
+            this.msg = val
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

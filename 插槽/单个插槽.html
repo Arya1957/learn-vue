@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> 单个插槽</title>
+</head>
+<body>
+  <div id="app">
+    <h4>下面是A组件，没有使用 slot</h4>
+    <component-a> </component-a>
+    <component-a> {{ msg }} </component-a>
+    <hr>
+    <h4>下面是B组件，使用了slot</h4>
+    <component-b> </component-b>
+    <component-b> {{ msg }} </component-b>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let componentA = {
+      template: '<div>我是A组件</div>'
+    }
+    let componentB = {
+      template: '<div>\
+                 <p>我是B组件</p>\
+                 <slot>如果父组件没有插入内容，我就作为默认内容；如果父组件插入了内容，我就会被替换掉</slot>\
+               </div>'
+    }
+    let app = new Vue({
+      el: '#app',
+      components: {
+        componentA,
+        componentB
+      },
+      data: {
+        msg: '我是父组件的内容'
+      }
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>  </title>
+</head>
+<body>
+  <div id="app">
+    <button @click="switchComp('A')">首页</button>
+    <button @click="switchComp('B')">推荐页</button>
+    <button @click="switchComp('C')">搜索</button>
+    <button @click="switchComp('D')">test</button>
+    <component :is="currentComp"></component> 
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('componentA', {
+      template: '<div>你好呀~ 欢迎来到首页 ~~ </div>'
+    });
+    Vue.component('componentB',{
+      template: '<div>你好呀~  欢迎来到推荐页 ~~ </div>'
+    });
+    Vue.component('componentC',{
+      template: '<div> 你好呀~  欢迎来到搜索页 ~~ </div>'
+    })
+    let componentD = {
+      template: '<div>D</div>'
+    }
+  let app = new Vue({
+    el: '#app',
+    components: { componentD },
+    data: {
+      currentComp: 'componentA'
+    },
+    methods: {
+      switchComp(tag) {
+        this.currentComp = 'component' + tag
+      }
+    } 
+  })
+  </script>
+
+</body>
+</html>
